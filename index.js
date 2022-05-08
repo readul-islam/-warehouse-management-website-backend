@@ -30,11 +30,7 @@ jwt.verify(token, process.env.ACCESS_TOKEN,(err,decoded) => {
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.2m6j3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
+
 
 
 
@@ -55,8 +51,8 @@ const run = async () => {
         app.get('/my-items',jwtVerify, async (req, res) => {
             const email = req.query.email;
             const decodedEmail = req.decoded
-            console.log(decodedEmail)
-            console.log(email)
+            // console.log(decodedEmail)
+            // console.log(email)
             const query = {email:email};
            
             
@@ -124,7 +120,7 @@ const run = async () => {
         })
         //update item quantity add and delete
         app.put('/add-inventory/:id', async (req, res) => {
-            let updateQuantity;
+           
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
             let result = await inventoryCollection.findOne(query);
