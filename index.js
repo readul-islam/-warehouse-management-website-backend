@@ -19,7 +19,7 @@ jwt.verify(token, process.env.ACCESS_TOKEN,(err,decoded) => {
     if(err){
         res.status(403).send({ message:'Forbidden access'})
     }else{
-        // console.log(decoded);
+        
         req.decoded = decoded;
         
         next()
@@ -51,8 +51,8 @@ const run = async () => {
         app.get('/my-items',jwtVerify, async (req, res) => {
             const email = req.query.email;
             const decodedEmail = req.decoded
-            // console.log(decodedEmail)
-            // console.log(email)
+        
+         
             const query = {email:email};
            
             
